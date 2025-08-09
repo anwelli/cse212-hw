@@ -225,6 +225,5 @@ private static void WildcardBinaryHelper(string pattern, string current, List<st
 
         // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
 
-}
-
+} 
 }
