@@ -126,13 +126,9 @@ public static class Recursion
 
         // TODO Start Problem 3
          if (remember.ContainsKey(s))
+         return remember[s];
     {
-        return remember[s];
-
-        }
-
         
-
         // Solve using recursion
             decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
         return ways;
@@ -229,5 +225,7 @@ private static void WildcardBinaryHelper(string pattern, string current, List<st
 
 
         // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+
+}
 
 }
