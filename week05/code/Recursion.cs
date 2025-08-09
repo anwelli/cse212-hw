@@ -15,7 +15,17 @@ public static class Recursion
     public static int SumSquaresRecursive(int n)
     {
         // TODO Start Problem 1
+        if (n <= 0)
+    {
+        // Base case: sum of squares for n <= 0 is 0
         return 0;
+    }
+    else
+    {
+        // Recursive case: n^2 + sum of squares of numbers from 1 to (n-1)
+        return n * n + SumSquaresRecursive(n - 1);
+    }
+
     }
 
     /// <summary>
@@ -40,6 +50,24 @@ public static class Recursion
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
         // TODO Start Problem 2
+            if (word.Length == size)
+    {
+        // Base case: if the word has reached the desired size, add it to the results
+        results.Add(word);
+    }
+    else
+    {
+        // Recursive case: try adding each letter to the word
+        foreach (var letter in letters)
+        {
+            // Check if the letter is already in the word to avoid duplicates
+            if (!word.Contains(letter))
+            {
+                PermutationsChoose(results, letters, size, word + letter);
+            }
+        }
+    }
+
     }
 
     /// <summary>
@@ -97,9 +125,16 @@ public static class Recursion
             return 4;
 
         // TODO Start Problem 3
+         if (remember.ContainsKey(s))
+    {
+        return remember[s];
+
+        }
+
+        
 
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+            decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
         return ways;
     }
 
@@ -119,6 +154,30 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+        
+          WildcardBinaryHelper(pattern, "", results);
+}
+
+private static void WildcardBinaryHelper(string pattern, string current, List<string> results)
+{
+    if (pattern.Length == 0)
+    {
+        results.Add(current);
+        return;
+    }
+
+    if (pattern[0] == '*')
+    {
+        WildcardBinaryHelper(pattern.Substring(1), current + "0", results);
+        WildcardBinaryHelper(pattern.Substring(1), current + "1", results);
+    }
+    else
+    {
+        WildcardBinaryHelper(pattern.Substring(1), current + pattern[0], results);
+    }
+}
+
+        
     }
 
     /// <summary>
@@ -129,15 +188,46 @@ public static class Recursion
     {
         // If this is the first time running the function, then we need
         // to initialize the currPath list.
-        if (currPath == null) {
+        if (currPath == null)
+        {
             currPath = new List<ValueTuple<int, int>>();
         }
-        
+
         // currPath.Add((1,2)); // Use this syntax to add to the current path
 
         // TODO Start Problem 5
         // ADD CODE HERE
+        // Check if the current position is out of bounds or a wall
+    if (x < 0 || x >= maze.Width || y < 0 || y >= maze.Height || maze.IsWall(x, y))
+    {
+        return;
+    }
+
+    // Check if the current position is already in the current path
+    if (currPath.Contains((x, y)))
+    {
+        return;
+    }
+
+    // Add the current position to the current path
+    currPath.Add((x, y));
+
+    // Check if the current position is the end of the maze
+    if (maze.IsEnd(x, y))
+    {
+        // Add the current path to the results
+        results.Add(string.Join(" -> ", currPath));
+    }
+    else
+    {
+        // Explore all possible directions
+        SolveMaze(results, maze, x - 1, y, new List<(int, int)>(currPath)); // Left
+        SolveMaze(results, maze, x + 1, y, new List<(int, int)>(currPath)); // Right
+        SolveMaze(results, maze, x, y - 1, new List<(int, int)>(currPath)); // Up
+        SolveMaze(results, maze, x, y + 1, new List<(int, int)>(currPath)); // Down
+    }
+
 
         // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
-    }
+
 }
