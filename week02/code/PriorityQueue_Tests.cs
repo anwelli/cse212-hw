@@ -112,4 +112,39 @@ public class PriorityQueueTests
         Assert.AreEqual("Item1", result4);
 }
 
+[TestMethod]
+public void TestPriorityQueue_DuplicateItems()
+{
+    var priorityQueue = new PriorityQueue();
+    priorityQueue.Enqueue("Item1", 1);
+    priorityQueue.Enqueue("Item1", 1);
+    priorityQueue.Enqueue("Item2", 2);
+    var result1 = priorityQueue.Dequeue();
+    var result2 = priorityQueue.Dequeue();
+    var result3 = priorityQueue.Dequeue();
+    Assert.AreEqual("Item2", result1);
+    Assert.AreEqual("Item1", result2);
+    Assert.AreEqual("Item1", result3);
+}
+
+[TestMethod]
+public void TestPriorityQueue_ItemsWithSamePriorityEnqueuedInDifferentOrder()
+{
+    var priorityQueue = new PriorityQueue();
+    priorityQueue.Enqueue("Item1", 1);
+    priorityQueue.Enqueue("Item3", 3);
+    priorityQueue.Enqueue("Item2", 1);
+    priorityQueue.Enqueue("Item4", 3);
+    var result1 = priorityQueue.Dequeue();
+    var result2 = priorityQueue.Dequeue();
+    var result3 = priorityQueue.Dequeue();
+    var result4 = priorityQueue.Dequeue();
+    Assert.AreEqual("Item3", result1);
+    Assert.AreEqual("Item4", result2);
+    Assert.AreEqual("Item1", result3);
+    Assert.AreEqual("Item2", result4);
+}
+
+
+
 }
