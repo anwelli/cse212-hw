@@ -13,7 +13,19 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+       // Step 1: Create an array to store the multiples of the given number
+    double[] multiples = new double[length];
+
+    // Step 2: Loop through the array and calculate each multiple
+    for (int i = 0; i < length; i++)
+    {
+        // Step 3: Calculate the multiple by multiplying the number with the current index plus one
+        multiples[i] = number * (i + 1);
+    }
+
+    // Step 4: Return the array of multiples
+    return multiples;
+
     }
 
     /// <summary>
@@ -29,5 +41,17 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+     // Step 1: Calculate the effective amount of rotation, considering cases where amount is greater than data.Count
+    amount = amount % data.Count;
+
+    // Step 2: Get the last 'amount' elements from the list
+    List<int> temp = data.GetRange(data.Count - amount, amount);
+
+    // Step 3: Remove the last 'amount' elements from the list
+    data.RemoveRange(data.Count - amount, amount);
+
+    // Step 4: Insert the removed elements at the beginning of the list
+    data.InsertRange(0, temp);
     }
 }
