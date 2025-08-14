@@ -13,7 +13,7 @@ public class Node
     {
         // TODO Start Problem 1
 
-        if (value < data)
+        if (value < Data)
         {
             // Insert to the left
             if (Left is null)
@@ -21,7 +21,7 @@ public class Node
             else
                 Left.Insert(value);
         }
-        else  if (value > Data)
+        else if (value > Data)  // Only insert if value is greater (no duplicates)
         {
             // Insert to the right
             if (Right is null)
@@ -36,18 +36,16 @@ public class Node
         // TODO Start Problem 2
         if (value == Data)
         return true;
-    else if (value < Data && Left != null)
-        return Left.Contains(value);
-    else if (value > Data && Right != null)
-        return Right.Contains(value);
-    else
-        return false;
+    if (value < Data)
+        return Left?.Contains(value) ?? false;
+    return Right?.Contains(value) ?? false;
     }
 
     public int GetHeight()
     {
-            int leftHeight = Left?.GetHeight() ?? 0;
+        // TODO Start Problem 4
+        int leftHeight = Left?.GetHeight() ?? 0;
     int rightHeight = Right?.GetHeight() ?? 0;
     return 1 + Math.Max(leftHeight, rightHeight);
-    }
+}
 }
